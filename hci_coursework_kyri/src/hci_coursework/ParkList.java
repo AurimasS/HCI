@@ -56,7 +56,7 @@ public class ParkList {
 		frame.getContentPane().setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Parks > Select a Park");
-		Image park = new ImageIcon(this.getClass().getResource("/Park.png")).getImage();
+		Image park = new ImageIcon(this.getClass().getResource("/Parks.png")).getImage();
 		lblNewLabel.setIcon(new ImageIcon(park));
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblNewLabel.setBounds(10, 11, 247, 31);

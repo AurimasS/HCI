@@ -1,6 +1,5 @@
 package hci_coursework;
 
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -10,7 +9,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
@@ -149,7 +147,7 @@ public class CategoryMenu {
 			frame.getContentPane().add(btn);
 			btn.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {//If the  button is pressed.
-					Necropolis necropolis = new Necropolis(null);
+					KelvingroveMuseum necropolis = new KelvingroveMuseum(null);
 					necropolis.getFrame().setVisible(true);
 					frame.dispose();
 			}

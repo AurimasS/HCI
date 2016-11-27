@@ -57,7 +57,7 @@ public class MuseumList {
 		frame.getContentPane().setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Museums > Select a Museum");
-		Image museum = new ImageIcon(this.getClass().getResource("/Museum.png")).getImage();
+		Image museum = new ImageIcon(this.getClass().getResource("/Museums.png")).getImage();
 		lblNewLabel.setIcon(new ImageIcon(museum));
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblNewLabel.setBounds(10, 11, 247, 31);

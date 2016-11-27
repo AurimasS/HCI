@@ -50,7 +50,7 @@ public class Lighthouse {
         
         
 		JLabel lblNewLabel = new JLabel("Home > Monuments > Lighthouse");
-		Image museum = new ImageIcon(this.getClass().getResource("/monument.png")).getImage();
+		Image museum = new ImageIcon(this.getClass().getResource("/Monuments.png")).getImage();
 		lblNewLabel.setIcon(new ImageIcon(museum));
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblNewLabel.setBounds(10, 11, 344, 46);
