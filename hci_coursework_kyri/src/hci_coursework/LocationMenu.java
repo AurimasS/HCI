@@ -17,7 +17,10 @@ public class LocationMenu {
     JLabel pic;
     Timer tm;
     int x = 0;
+    
 	private JFrame frame;
+	private int max_x;
+	private int max_y;
 	
 	private String category;
 	private String name;
@@ -34,12 +37,14 @@ public class LocationMenu {
 			"\r\n Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
 			"\r\n Nam cursus dui ac velit dictum, vitae blandit ligula venenatis.",
 			"\r\n Maecenas vel sapien non nibh mollis aliquam maximus id dolor."};
-	int max_x = 1024;
-	int max_y = 768;
+
 	/**
 	 * Create the application.
 	 */
-	public LocationMenu(String category, String name) {
+	public LocationMenu(JFrame frame, String category, String name) {
+		this.frame = frame;
+		this.max_x = frame.getWidth();
+		this.max_y = frame.getHeight();
 		this.category = category;
 		this.name = name;
 		initialize();
@@ -58,11 +63,8 @@ public class LocationMenu {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(0, 0, max_x, max_y);
-		frame.setUndecorated(true);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		frame.getContentPane().removeAll();
+		frame.getContentPane().repaint();
 		
 	    pic = new JLabel();
 		pic.setBounds(20, 50, 500, 275);
@@ -91,15 +93,14 @@ public class LocationMenu {
         
         // Back button
         JButton btnBack = new JButton("Back");
+        btnBack.setBounds(20, max_y - 55, 100, 35);
 		Image back = new ImageIcon(this.getClass().getResource("/Back.png")).getImage();
-		btnBack.setBounds(20, max_y - 55, 100, 35);
 		btnBack.setIcon(new ImageIcon(back));
-		frame.getContentPane().add(btnBack);
+		
         btnBack.addActionListener(new ActionListener() {			
 			public void actionPerformed(ActionEvent e) {
-				CategoryMenu menu = new CategoryMenu(LocationMenu.this.category);
-				menu.getFrame().setVisible(true);
-				frame.dispose();
+				@SuppressWarnings("unused")
+				CategoryMenu menu = new CategoryMenu(frame, category);
 			}	
         });
 		frame.getContentPane().add(btnBack);

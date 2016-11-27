@@ -63,9 +63,8 @@ public class NavPills {
         	btnHome.setBackground(this.primary);
     		btnHome.addActionListener(new ActionListener() {			
     			public void actionPerformed(ActionEvent e) {
-    				MainMenu menu = new MainMenu();
-    				menu.getFrame().setVisible(true);
-    				NavPills.this.frame.dispose();
+    				@SuppressWarnings("unused")
+					MainMenu menu = new MainMenu(frame);
     			}
             });
     		
@@ -93,9 +92,8 @@ public class NavPills {
             	btnCat.setBackground(this.primary);
             	btnCat.addActionListener(new ActionListener() {			
         			public void actionPerformed(ActionEvent e) {
-        				CategoryMenu menu = new CategoryMenu(NavPills.this.category);
-        				menu.getFrame().setVisible(true);
-        				NavPills.this.frame.dispose();
+        				@SuppressWarnings("unused")
+						CategoryMenu menu = new CategoryMenu(frame, category);
         			}
                 });
             	

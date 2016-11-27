@@ -17,13 +17,13 @@ import javax.swing.SwingConstants;
 public class MainMenu {
 
 	private JFrame frame;
+	private int max_x = 1024;
+	private int max_y = 768;
     
     private String[] categories = {"Parks", "Monuments", "Museums",
     		"Shopping", "Nightlife", "Bars",
     		"Cafes", "Restaurants", "Fast Food",
     		"Hotels"};
-	int max_x = 1024;
-	int max_y = 768;
     
     /**
 	 * Launch the application.
@@ -45,6 +45,19 @@ public class MainMenu {
 	 * Create the application.
 	 */
 	public MainMenu() {
+		this.frame = new JFrame();
+		this.frame.getContentPane().setFont(new Font("Tahoma", Font.BOLD, 12));
+		this.frame.setBounds(0, 0, max_x, max_y);
+		this.frame.setUndecorated(true);
+		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.frame.getContentPane().setLayout(null);
+		initialize();
+	}
+	
+	public MainMenu(JFrame frame) {
+		this.frame = frame;
+		this.max_x = frame.getWidth();
+		this.max_y = frame.getHeight();
 		initialize();
 	}
 
@@ -52,12 +65,8 @@ public class MainMenu {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.getContentPane().setFont(new Font("Tahoma", Font.BOLD, 12));
-		frame.setBounds(0, 0, max_x, max_y);
-		frame.setUndecorated(true);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		frame.getContentPane().removeAll();
+		frame.getContentPane().repaint();
 		
 		// Top Navigation pills
 		NavPills nav = new NavPills(frame, null, null);
@@ -102,9 +111,8 @@ public class MainMenu {
 				frame.getContentPane().add(btn);
 				btn.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {//If the  button is pressed.
-						CategoryMenu menu = new CategoryMenu(cat);
-						menu.getFrame().setVisible(true);
-						frame.dispose();
+						@SuppressWarnings("unused")
+						CategoryMenu menu = new CategoryMenu(frame, cat);
 				}
 				});
 				x += width + 10;
@@ -116,12 +124,12 @@ public class MainMenu {
 		btnBack.setForeground(Color.BLACK);
 		btnBack.setFont(new Font("Calibri", Font.BOLD, 14));
 		btnBack.setBounds(20, max_y - 55, 80, 35);
-		frame.getContentPane().add(btnBack);
         btnBack.addActionListener(new ActionListener() {			
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
 			}	
         });
+        frame.getContentPane().add(btnBack);
         
         // Weekly Recommendations label
 		JLabel lblTopThingsTo = new JLabel("Weekly Recommendations:");

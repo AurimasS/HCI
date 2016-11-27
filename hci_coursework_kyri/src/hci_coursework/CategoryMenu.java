@@ -11,12 +11,11 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
 public class CategoryMenu {
-
 	private JFrame frame;
+	private int max_x;
+	private int max_y;
 	private String category;
     private String[] names;
-	int max_x = 1024;
-	int max_y = 768;
 	
 	private String[] park_names = {"Crescent Plaza", "Crescent Garden", "Crystal Cove Meadows", "Solstice Plaza",
 			"Prospect Meadows", "Trillium Grounds", "plaoms Gardens", "vroxad Park",
@@ -66,7 +65,10 @@ public class CategoryMenu {
 	/**
 	 * Create the application.
 	 */
-	public CategoryMenu(String category) {
+	public CategoryMenu(JFrame frame, String category) {
+		this.frame = frame;
+		this.max_x = frame.getWidth();
+		this.max_y = frame.getHeight();
 		this.category = category;
 		switch (category) {
 			case "Parks":
@@ -109,11 +111,8 @@ public class CategoryMenu {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(0, 0, max_x, max_y);
-		frame.setUndecorated(true);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		frame.getContentPane().removeAll();
+		frame.getContentPane().repaint();
 		
 		// Top Navigation pills
 		NavPills nav = new NavPills(frame, this.category, null);
@@ -149,10 +148,9 @@ public class CategoryMenu {
 			frame.getContentPane().add(btn);
 			btn.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {//If the  button is pressed.
-					LocationMenu menu = new LocationMenu(CategoryMenu.this.category, name);
-					menu.getFrame().setVisible(true);
-					frame.dispose();
-			}
+					@SuppressWarnings("unused")
+					LocationMenu menu = new LocationMenu(frame, category, name);
+				}
 			});
 			x += width + 10;
 		}
@@ -160,20 +158,15 @@ public class CategoryMenu {
 		// Back button
 		JButton btnBack = new JButton("Back");
 		Image back = new ImageIcon(this.getClass().getResource("/Back.png")).getImage();
-		btnBack.setBounds(20, max_y - 55, 100, 35);
 		btnBack.setIcon(new ImageIcon(back));
-		frame.getContentPane().add(btnBack);
+		btnBack.setBounds(20, max_y - 55, 100, 35);
         btnBack.addActionListener(new ActionListener() {			
 			public void actionPerformed(ActionEvent e) {
-				MainMenu menu = new MainMenu();
-				menu.getFrame().setVisible(true);
-				frame.dispose();
+				@SuppressWarnings("unused")
+				MainMenu menu = new MainMenu(frame);
 			}	
         });
 		frame.getContentPane().add(btnBack);
 	}
 
-	public JFrame getFrame() {
-		return this.frame;
-	}
 }
