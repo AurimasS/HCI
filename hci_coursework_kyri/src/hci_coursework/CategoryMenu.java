@@ -117,6 +117,7 @@ public class CategoryMenu {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
+		// Top Navigation label
 		JLabel lblNewLabel = new JLabel(this.category + " > Select a location");
 		Image icon;
 		try {
@@ -126,8 +127,20 @@ public class CategoryMenu {
 		}
 		lblNewLabel.setIcon(new ImageIcon(icon));
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblNewLabel.setBounds(0, 0, 273, 31);
+		lblNewLabel.setBounds(0, 0, 275, 40);
 		frame.getContentPane().add(lblNewLabel);
+		
+		// Help button
+		JButton btnHelp = new JButton("Help");
+		Image help = new ImageIcon(this.getClass().getResource("/Help.png")).getImage();
+		btnHelp.setBounds(max_x - 100, 0, 100, 35);
+		btnHelp.setIcon(new ImageIcon(help));
+		btnHelp.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				 JOptionPane.showMessageDialog(null, "this is a pop up message");
+			}
+		});
+		frame.getContentPane().add(btnHelp);
 		
 		// Button for each location
 		int x = 20;
@@ -147,26 +160,18 @@ public class CategoryMenu {
 			frame.getContentPane().add(btn);
 			btn.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {//If the  button is pressed.
-					KelvingroveMuseum necropolis = new KelvingroveMuseum(null);
-					necropolis.getFrame().setVisible(true);
+					LocationMenu menu = new LocationMenu(CategoryMenu.this.category, name);
+					menu.getFrame().setVisible(true);
 					frame.dispose();
 			}
 			});
 			x += width + 10;
 		}
-		JButton btnHelp = new JButton("Help");
-		Image help = new ImageIcon(this.getClass().getResource("/Help.png")).getImage();
-		btnHelp.setBounds(max_x - 100, 0, 100, 35);
-		btnHelp.setIcon(new ImageIcon(help));
-		btnHelp.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				 JOptionPane.showMessageDialog(null, "this is a pop up message");
-			}
-		});
-		frame.getContentPane().add(btnHelp);
 		
+		// Back button
 		JButton btnBack = new JButton("Back");
 		Image back = new ImageIcon(this.getClass().getResource("/Back.png")).getImage();
+		btnBack.setBounds(20, max_y - 55, 100, 35);
 		btnBack.setIcon(new ImageIcon(back));
 		frame.getContentPane().add(btnBack);
         btnBack.addActionListener(new ActionListener() {			
@@ -176,7 +181,6 @@ public class CategoryMenu {
 				frame.dispose();
 			}	
         });
-		btnBack.setBounds(20, max_y - 55, 100, 35);
 		frame.getContentPane().add(btnBack);
 	}
 

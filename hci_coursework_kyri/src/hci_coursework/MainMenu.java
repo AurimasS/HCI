@@ -59,6 +59,26 @@ public class MainMenu {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
+		// Top Navigaion label
+		JLabel lblNewLabel = new JLabel("Home");
+		Image imga = new ImageIcon(this.getClass().getResource("/Home.png")).getImage();
+		lblNewLabel.setIcon(new ImageIcon(imga));
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNewLabel.setBounds(0, 0, 91, 37);
+		frame.getContentPane().add(lblNewLabel);
+		
+		// Help button
+		JButton btnHelp = new JButton("Help");
+		Image help = new ImageIcon(this.getClass().getResource("/Help.png")).getImage();
+		btnHelp.setIcon(new ImageIcon(help));
+		btnHelp.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				 JOptionPane.showMessageDialog(null, "Welcome to Glasgow, Please choose one of the options below");
+			}
+		});
+		btnHelp.setBounds(max_x - 100, 0, 100, 35);
+		frame.getContentPane().add(btnHelp);
+		
 		// Button for each category
 		int x = 20;
 		int y = 50;
@@ -107,29 +127,13 @@ public class MainMenu {
 			}	
         });
         
+        // Weekly Recommendations label
 		JLabel lblTopThingsTo = new JLabel("Weekly Recommendations:");
 		lblTopThingsTo.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblTopThingsTo.setBounds(max_x - 360, 60, 200, 20);
 		frame.getContentPane().add(lblTopThingsTo);
 		
-		JLabel lblNewLabel = new JLabel("Home");
-		Image imga = new ImageIcon(this.getClass().getResource("/Home.png")).getImage();
-		lblNewLabel.setIcon(new ImageIcon(imga));
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNewLabel.setBounds(0, 0, 91, 37);
-		frame.getContentPane().add(lblNewLabel);
-		
-		JButton btnHelp = new JButton("Help");
-		Image help = new ImageIcon(this.getClass().getResource("/Help.png")).getImage();
-		btnHelp.setIcon(new ImageIcon(help));
-		btnHelp.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				 JOptionPane.showMessageDialog(null, "Welcome to Glasgow, Please choose one of the options below");
-			}
-		});
-		btnHelp.setBounds(max_x - 100, 0, 100, 35);
-		frame.getContentPane().add(btnHelp);
-		
+		// History button
 		JButton btnNewButton = new JButton("History");
 		btnNewButton.setFont(new Font("Calibri", Font.BOLD, 14));
 		btnNewButton.addActionListener(new ActionListener() {
