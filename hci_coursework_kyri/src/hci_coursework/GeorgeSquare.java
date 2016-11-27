@@ -73,7 +73,7 @@ public class GeorgeSquare {
 		btnHome.setIcon(new ImageIcon(img));
 		btnHome.addActionListener(new ActionListener() {			
 			public void actionPerformed(ActionEvent e) {
-				GeorgeSquare.this.main= new MainMenu(GeorgeSquare.this);
+				GeorgeSquare.this.main= new MainMenu();
 				GeorgeSquare.this.main.getFrame().setVisible(true);
 			
 			}	

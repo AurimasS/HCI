@@ -51,7 +51,7 @@ public class Necropolis {
         
         
 		JLabel lblNewLabel = new JLabel("Home > Monuments > The Necropolis");
-		Image museum = new ImageIcon(this.getClass().getResource("/monument.png")).getImage();
+		Image museum = new ImageIcon(this.getClass().getResource("/Monuments.png")).getImage();
 		lblNewLabel.setIcon(new ImageIcon(museum));
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblNewLabel.setBounds(10, 11, 344, 46);
@@ -73,7 +73,7 @@ public class Necropolis {
 		btnHome.setIcon(new ImageIcon(img));
 		btnHome.addActionListener(new ActionListener() {			
 			public void actionPerformed(ActionEvent e) {
-				Necropolis.this.main= new MainMenu(Necropolis.this);
+				Necropolis.this.main= new MainMenu();
 				Necropolis.this.main.getFrame().setVisible(true);
 			
 			}	

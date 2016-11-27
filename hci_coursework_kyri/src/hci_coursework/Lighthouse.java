@@ -72,7 +72,7 @@ public class Lighthouse {
 		btnHome.setIcon(new ImageIcon(img));
 		btnHome.addActionListener(new ActionListener() {			
 			public void actionPerformed(ActionEvent e) {
-				Lighthouse.this.main= new MainMenu(Lighthouse.this);
+				Lighthouse.this.main= new MainMenu();
 				Lighthouse.this.main.getFrame().setVisible(true);
 			
 			}	

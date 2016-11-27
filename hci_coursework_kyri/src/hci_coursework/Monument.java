@@ -39,7 +39,7 @@ public class Monument {
 		frame.getContentPane().setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Monuments > Select a Monument");
-		Image monument = new ImageIcon(this.getClass().getResource("/monument.png")).getImage();
+		Image monument = new ImageIcon(this.getClass().getResource("/Monuments.png")).getImage();
 		lblNewLabel.setIcon(new ImageIcon(monument));
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblNewLabel.setBounds(10, 11, 273, 31);

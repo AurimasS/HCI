@@ -77,7 +77,7 @@ public class KelvingrovePark {
 		btnHome.setIcon(new ImageIcon(img));
 		btnHome.addActionListener(new ActionListener() {			
 			public void actionPerformed(ActionEvent e) {
-				KelvingrovePark.this.main= new MainMenu(KelvingrovePark.this);
+				KelvingrovePark.this.main= new MainMenu();
 				KelvingrovePark.this.main.getFrame().setVisible(true);
 			
 			}	

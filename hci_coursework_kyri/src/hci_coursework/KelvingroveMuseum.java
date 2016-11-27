@@ -108,7 +108,7 @@ public class KelvingroveMuseum {
 		btnHome.setIcon(new ImageIcon(img));
 		btnHome.addActionListener(new ActionListener() {			
 			public void actionPerformed(ActionEvent e) {
-				KelvingroveMuseum.this.main= new MainMenu(KelvingroveMuseum.this);
+				KelvingroveMuseum.this.main= new MainMenu();
 				KelvingroveMuseum.this.main.getFrame().setVisible(true);
 			
 			}	
