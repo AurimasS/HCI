@@ -2,9 +2,11 @@ package hci_coursework;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.border.Border;
@@ -35,11 +37,19 @@ public class NavPills {
 		int cat_width = 150;
 		int name_width = 250;
 		int height = 35;
+		int icon_size = 25;
 		
 		// Home button, highlighted
         JButton btnHome = new JButton("Home");
-		//Image icon = new ImageIcon(this.getClass().getResource("/Back.png")).getImage();
-        //btnHome.setIcon(new ImageIcon(icon));
+        try {
+        	Image icon = new ImageIcon(this.getClass().getResource("/icons/Home.png")).getImage();
+        	icon = icon.getScaledInstance(icon_size, icon_size, Image.SCALE_DEFAULT);
+        	btnHome.setIcon(new ImageIcon(icon));
+        } catch (Exception e) {
+        	Image icon = new ImageIcon(this.getClass().getResource("/icons/Unknown.png")).getImage();
+        	icon = icon.getScaledInstance(icon_size, icon_size, Image.SCALE_DEFAULT);
+        	btnHome.setIcon(new ImageIcon(icon));
+        }
         btnHome.setBounds(0, 0, home_width, height);
         btnHome.setBackground(this.highlight);
         btnHome.setForeground(Color.WHITE);
@@ -62,8 +72,15 @@ public class NavPills {
     		
     		// Category button
             JButton btnCat = new JButton(this.category);
-    		//Image icon = new ImageIcon(this.getClass().getResource("/Back.png")).getImage();
-            //btnCat.setIcon(new ImageIcon(icon));
+            try {
+            	Image icon = new ImageIcon(this.getClass().getResource("/icons/" + this.category + ".png")).getImage();
+            	icon = icon.getScaledInstance(icon_size, icon_size, Image.SCALE_DEFAULT);
+            	btnCat.setIcon(new ImageIcon(icon));
+            } catch (Exception e) {
+            	Image icon = new ImageIcon(this.getClass().getResource("/icons/Unknown.png")).getImage();
+            	icon = icon.getScaledInstance(icon_size, icon_size, Image.SCALE_DEFAULT);
+            	btnCat.setIcon(new ImageIcon(icon));
+            }
             btnCat.setBounds(home_width, 0, cat_width, height);
             btnCat.setBackground(this.highlight);
             btnCat.setForeground(Color.WHITE);

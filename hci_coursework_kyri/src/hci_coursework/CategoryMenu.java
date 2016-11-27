@@ -46,7 +46,7 @@ public class CategoryMenu {
 			"Q & A Room", "Havana Shrine Coffee Bar", "Hava Pearl Barista", "Melting Boulder Diner",
 			"Havana Fest Espresso Bar", "Hidden Heaven Diner", "Hot Shots Cafe", "This & That Coffee Bar",
 			"Thinking Cup Cafe", "Ground Up Coffee Bar", "Trembling Cup Cafeteria", "Gentle Teapot Room"};
-	private String[] retaurant_names = {"The Vintage Duke", "The Village Door", "Bambino", "Beehive",
+	private String[] restaurant_names = {"The Vintage Duke", "The Village Door", "Bambino", "Beehive",
 			"The Northern After Dark", "The Cool Cat Shrimp", "The Malt Lily", "Retro",
 			"The Goat", "The Lion", "The Coriander Lion", "The Streetwise Crown",
 			"The Savory Chicken", "Chapter", "Whisperwind", "Kingsize"};
@@ -91,7 +91,7 @@ public class CategoryMenu {
 				this.names = cafe_names;
 				break;
 			case "Retaurants":
-				this.names = retaurant_names;
+				this.names = restaurant_names;
 				break;
 			case "Fast Food":
 				this.names = ff_names;

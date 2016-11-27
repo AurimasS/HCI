@@ -20,7 +20,7 @@ public class MainMenu {
     
     private String[] categories = {"Parks", "Monuments", "Museums",
     		"Shopping", "Nightlife", "Bars",
-    		"Cafes", "Retaurants", "Fast Food",
+    		"Cafes", "Restaurants", "Fast Food",
     		"Hotels"};
 	int max_x = 1024;
 	int max_y = 768;
