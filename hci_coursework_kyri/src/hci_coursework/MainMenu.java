@@ -59,13 +59,9 @@ public class MainMenu {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		// Top Navigaion label
-		JLabel lblNewLabel = new JLabel("Home");
-		Image imga = new ImageIcon(this.getClass().getResource("/Home.png")).getImage();
-		lblNewLabel.setIcon(new ImageIcon(imga));
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNewLabel.setBounds(0, 0, 91, 37);
-		frame.getContentPane().add(lblNewLabel);
+		// Top Navigation pills
+		NavPills nav = new NavPills(frame, null, null);
+		nav.buildNavPills();
 		
 		// Help button
 		JButton btnHelp = new JButton("Help");

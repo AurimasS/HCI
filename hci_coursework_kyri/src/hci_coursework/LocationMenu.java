@@ -85,18 +85,9 @@ public class LocationMenu {
         // Starts the timer 
         tm.start();
         
-		// Top Navigation
-		JLabel lblNewLabel = new JLabel("Home > " + this.category + " > " + this.name);
-		Image icon;
-		try {
-			icon = new ImageIcon(this.getClass().getResource("/" + this.category + ".png")).getImage();
-		} catch (Exception e) {
-			icon = new ImageIcon(this.getClass().getResource("/Unknown.png")).getImage();
-		}
-		lblNewLabel.setIcon(new ImageIcon(icon));
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblNewLabel.setBounds(0, 0, 350, 40);
-		frame.getContentPane().add(lblNewLabel);
+		// Top Navigation pills
+		NavPills nav = new NavPills(frame, this.category, this.name);
+		nav.buildNavPills();
         
         // Back button
         JButton btnBack = new JButton("Back");

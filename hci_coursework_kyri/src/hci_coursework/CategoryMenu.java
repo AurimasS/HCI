@@ -1,6 +1,5 @@
 package hci_coursework;
 
-import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,7 +7,6 @@ import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
@@ -117,18 +115,9 @@ public class CategoryMenu {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		// Top Navigation label
-		JLabel lblNewLabel = new JLabel(this.category + " > Select a location");
-		Image icon;
-		try {
-			icon = new ImageIcon(this.getClass().getResource("/" + this.category + ".png")).getImage();
-		} catch (Exception e) {
-			icon = new ImageIcon(this.getClass().getResource("/Unknown.png")).getImage();
-		}
-		lblNewLabel.setIcon(new ImageIcon(icon));
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblNewLabel.setBounds(0, 0, 275, 40);
-		frame.getContentPane().add(lblNewLabel);
+		// Top Navigation pills
+		NavPills nav = new NavPills(frame, this.category, null);
+		nav.buildNavPills();
 		
 		// Help button
 		JButton btnHelp = new JButton("Help");
