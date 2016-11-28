@@ -115,8 +115,7 @@ public class CategoryMenu {
 		frame.getContentPane().repaint();
 		
 		// Top Navigation pills
-		NavPills nav = new NavPills(frame, this.category, null);
-		nav.buildNavPills();
+		new NavPills(frame, this.category, null);
 		
 		// Help button
 		JButton btnHelp = new JButton("Help");
@@ -148,25 +147,14 @@ public class CategoryMenu {
 			frame.getContentPane().add(btn);
 			btn.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {//If the  button is pressed.
-					@SuppressWarnings("unused")
-					LocationMenu menu = new LocationMenu(frame, category, name);
+					new LocationMenu(frame, category, name);
 				}
 			});
 			x += width + 10;
 		}
 		
 		// Back button
-		JButton btnBack = new JButton("Back");
-		Image back = new ImageIcon(this.getClass().getResource("/Back.png")).getImage();
-		btnBack.setIcon(new ImageIcon(back));
-		btnBack.setBounds(20, max_y - 55, 100, 35);
-        btnBack.addActionListener(new ActionListener() {			
-			public void actionPerformed(ActionEvent e) {
-				@SuppressWarnings("unused")
-				MainMenu menu = new MainMenu(frame);
-			}	
-        });
-		frame.getContentPane().add(btnBack);
+		new NavBack(frame, "Home");
 	}
 
 }

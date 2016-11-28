@@ -88,22 +88,10 @@ public class LocationMenu {
         tm.start();
         
 		// Top Navigation pills
-		NavPills nav = new NavPills(frame, this.category, this.name);
-		nav.buildNavPills();
+		new NavPills(frame, category, name);
         
         // Back button
-        JButton btnBack = new JButton("Back");
-        btnBack.setBounds(20, max_y - 55, 100, 35);
-		Image back = new ImageIcon(this.getClass().getResource("/Back.png")).getImage();
-		btnBack.setIcon(new ImageIcon(back));
-		
-        btnBack.addActionListener(new ActionListener() {			
-			public void actionPerformed(ActionEvent e) {
-				@SuppressWarnings("unused")
-				CategoryMenu menu = new CategoryMenu(frame, category);
-			}	
-        });
-		frame.getContentPane().add(btnBack);
+		new NavBack(frame, category);
 		
 		// Description label
 		JLabel lblHistoryOfThe = new JLabel("Description");

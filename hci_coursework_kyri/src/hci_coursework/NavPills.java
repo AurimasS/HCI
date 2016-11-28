@@ -1,7 +1,6 @@
 package hci_coursework;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,16 +8,11 @@ import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
 
 public class NavPills {
 	private JFrame frame;
 	private String category;
 	private String name;
-	private Color primary = new Color (16, 146, 0);
-	private Color highlight = new Color (223, 97, 12);
-	private Border border = new LineBorder(Color.BLACK, 1);
 	
 	public NavPills(JFrame frame, String category, String name) {
 		this.frame = frame;
@@ -30,9 +24,10 @@ public class NavPills {
 			this.category = category;
 			this.name = name;
 		}
+		buildNavPills();
 	}
 	
-	public void buildNavPills() {
+	private void buildNavPills() {
 		int home_width = 100;
 		int cat_width = 150;
 		int name_width = 250;
@@ -43,24 +38,24 @@ public class NavPills {
         JButton btnHome = new JButton("Home");
         try {
         	Image icon = new ImageIcon(this.getClass().getResource("/icons/Home.png")).getImage();
-        	icon = icon.getScaledInstance(icon_size, icon_size, Image.SCALE_DEFAULT);
+        	icon = icon.getScaledInstance(icon_size, icon_size, Image.SCALE_SMOOTH);
         	btnHome.setIcon(new ImageIcon(icon));
         } catch (Exception e) {
         	Image icon = new ImageIcon(this.getClass().getResource("/icons/Unknown.png")).getImage();
-        	icon = icon.getScaledInstance(icon_size, icon_size, Image.SCALE_DEFAULT);
+        	icon = icon.getScaledInstance(icon_size, icon_size, Image.SCALE_SMOOTH);
         	btnHome.setIcon(new ImageIcon(icon));
         }
         btnHome.setBounds(0, 0, home_width, height);
-        btnHome.setBackground(this.highlight);
+        btnHome.setBackground(Style.HIGHLIGHT);
         btnHome.setForeground(Color.WHITE);
-        btnHome.setBorder(border);
-        btnHome.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 14));
+        btnHome.setBorder(Style.BORDER_LIGHT);
+        btnHome.setFont(Style.BOLD_ITALIC);
 
         
         // If category exists, add it and highlight it instead of home button
         if (this.category != null) {
-        	btnHome.setFont(new Font("Tahoma", Font.BOLD, 14));
-        	btnHome.setBackground(this.primary);
+        	btnHome.setFont(Style.BOLD);
+        	btnHome.setBackground(Style.PRIMARY);
     		btnHome.addActionListener(new ActionListener() {			
     			public void actionPerformed(ActionEvent e) {
     				@SuppressWarnings("unused")
@@ -73,23 +68,23 @@ public class NavPills {
             JButton btnCat = new JButton(this.category);
             try {
             	Image icon = new ImageIcon(this.getClass().getResource("/icons/" + this.category + ".png")).getImage();
-            	icon = icon.getScaledInstance(icon_size, icon_size, Image.SCALE_DEFAULT);
+            	icon = icon.getScaledInstance(icon_size, icon_size, Image.SCALE_SMOOTH);
             	btnCat.setIcon(new ImageIcon(icon));
             } catch (Exception e) {
             	Image icon = new ImageIcon(this.getClass().getResource("/icons/Unknown.png")).getImage();
-            	icon = icon.getScaledInstance(icon_size, icon_size, Image.SCALE_DEFAULT);
+            	icon = icon.getScaledInstance(icon_size, icon_size, Image.SCALE_SMOOTH);
             	btnCat.setIcon(new ImageIcon(icon));
             }
             btnCat.setBounds(home_width, 0, cat_width, height);
-            btnCat.setBackground(this.highlight);
+            btnCat.setBackground(Style.HIGHLIGHT);
             btnCat.setForeground(Color.WHITE);
-            btnCat.setBorder(border);
-            btnCat.setFont(new Font("Tahoma", Font.ITALIC, 14));
+            btnCat.setBorder(Style.BORDER_LIGHT);
+            btnCat.setFont(Style.ITALIC);
             
             // If name exists, add it and highlight it instead of category button
             if (this.name != null) {
-            	btnCat.setFont(new Font("Tahoma", Font.PLAIN, 14));
-            	btnCat.setBackground(this.primary);
+            	btnCat.setFont(Style.PLAIN);
+            	btnCat.setBackground(Style.PRIMARY);
             	btnCat.addActionListener(new ActionListener() {			
         			public void actionPerformed(ActionEvent e) {
         				@SuppressWarnings("unused")
@@ -101,10 +96,10 @@ public class NavPills {
         		//Image icon = new ImageIcon(this.getClass().getResource("/Back.png")).getImage();
                 //btnName.setIcon(new ImageIcon(icon));
                 btnName.setBounds(home_width + cat_width, 0, name_width, height);
-                btnName.setBackground(this.highlight);
+                btnName.setBackground(Style.HIGHLIGHT);
                 btnName.setForeground(Color.WHITE);
-                btnName.setBorder(border);
-                btnName.setFont(new Font("Tahoma", Font.ITALIC, 14));
+                btnName.setBorder(Style.BORDER_LIGHT);
+                btnName.setFont(Style.ITALIC);
                 
                 this.frame.getContentPane().add(btnHome);
                 this.frame.getContentPane().add(btnCat);

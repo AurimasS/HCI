@@ -69,8 +69,7 @@ public class MainMenu {
 		frame.getContentPane().repaint();
 		
 		// Top Navigation pills
-		NavPills nav = new NavPills(frame, null, null);
-		nav.buildNavPills();
+		new NavPills(frame, null, null);
 		
 		// Help button
 		JButton btnHelp = new JButton("Help");
@@ -111,8 +110,7 @@ public class MainMenu {
 				frame.getContentPane().add(btn);
 				btn.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {//If the  button is pressed.
-						@SuppressWarnings("unused")
-						CategoryMenu menu = new CategoryMenu(frame, cat);
+						new CategoryMenu(frame, cat);
 				}
 				});
 				x += width + 10;
@@ -120,16 +118,7 @@ public class MainMenu {
 		}
 		
 		// This is the Back button, which is grayed out in the main menu
-		JButton btnBack = new JButton("Back");
-		btnBack.setForeground(Color.BLACK);
-		btnBack.setFont(new Font("Calibri", Font.BOLD, 14));
-		btnBack.setBounds(20, max_y - 55, 80, 35);
-        btnBack.addActionListener(new ActionListener() {			
-			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
-			}	
-        });
-        frame.getContentPane().add(btnBack);
+		new NavBack(frame, null);
         
         // Weekly Recommendations label
 		JLabel lblTopThingsTo = new JLabel("Weekly Recommendations:");
