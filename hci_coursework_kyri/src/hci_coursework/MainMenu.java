@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 public class MainMenu {
@@ -46,7 +47,6 @@ public class MainMenu {
 	 */
 	public MainMenu() {
 		this.frame = new JFrame();
-		this.frame.getContentPane().setFont(new Font("Tahoma", Font.BOLD, 12));
 		this.frame.setBounds(0, 0, max_x, max_y);
 		this.frame.setUndecorated(true);
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -83,38 +83,68 @@ public class MainMenu {
 		btnHelp.setBounds(max_x - 100, 0, 100, 35);
 		frame.getContentPane().add(btnHelp);
 		
-		// Button for each category
+		// Panel for each category
 		int x = 20;
 		int y = 50;
+		int panel_height = 140;
 		int width = 150;
-		int height = 140;
+		int height = 40;
+		int margin = 5;
+		
 		for (String cat: categories) {
 			if (x > 3 * width) {
 				x = 20;
 				y += 150;
 			}
 			
-			JButton btn = new JButton(cat);
-			try {
-				Image image = new ImageIcon(this.getClass().getResource("/" + cat + ".png")).getImage();
-				btn.setIcon(new ImageIcon(image));
-			} catch (Exception e) {
-				Image image = new ImageIcon(this.getClass().getResource("/Unknown.png")).getImage();
-				btn.setIcon(new ImageIcon(image));
-			} finally {
-				btn.setForeground(Color.BLACK);
-				btn.setFont(new Font("Calibri", Font.BOLD, 14));
-				btn.setBounds(x, y, width, height);
-				btn.setVerticalAlignment(SwingConstants.NORTH);
-				btn.setHorizontalAlignment(SwingConstants.LEFT);
-				frame.getContentPane().add(btn);
-				btn.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {//If the  button is pressed.
-						new CategoryMenu(frame, cat);
+			// Clickable part of the panel
+			JButton clickable = new JButton();
+			clickable.setBounds(x, y, width, panel_height);
+			clickable.setOpaque(false);
+			clickable.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) { //If the panel is pressed.
+					new CategoryMenu(frame, cat);
 				}
-				});
-				x += width + 10;
-			}
+			});
+			
+			// Background image of the panel
+			JLabel img = new JLabel();
+			img.setBounds(x, y, width, panel_height);
+			img.setBackground(Style.PRIMARY);
+			img.setOpaque(true);
+            try {
+            	Image i = new ImageIcon(this.getClass().getResource("/categories/" + cat + ".jpg")).getImage();
+            	i = i.getScaledInstance(width, panel_height, Image.SCALE_SMOOTH);
+            	img.setIcon(new ImageIcon(i));
+            } catch (Exception e) {
+            	Image i = new ImageIcon(this.getClass().getResource("/categories/Unknown.jpg")).getImage();
+            	i = i.getScaledInstance(width, panel_height, Image.SCALE_SMOOTH);
+            	img.setIcon(new ImageIcon(i));
+            }
+            
+            // Border shadow of the panel
+			JLabel shadow = new JLabel();
+			shadow.setBounds(x, y, width, panel_height);
+			shadow.setBorder(Style.BORDER_THICK);
+            try {
+            	Image i = new ImageIcon(this.getClass().getResource("/Shadow.png")).getImage();
+            	i = i.getScaledInstance(width, panel_height, Image.SCALE_SMOOTH);
+            	shadow.setIcon(new ImageIcon(i));
+            } catch (Exception e) {}
+          
+            // Label for the panel
+			JLabel label = new JLabel(cat);
+			label.setForeground(Color.WHITE);
+			label.setFont(Style.BOLD);
+			label.setBounds(x + margin, y + margin, width - margin, height - margin);
+			label.setVerticalAlignment(SwingConstants.NORTH);
+			label.setHorizontalAlignment(SwingConstants.LEFT);
+			
+			frame.getContentPane().add(label);
+			frame.getContentPane().add(shadow);
+			frame.getContentPane().add(img);
+			frame.getContentPane().add(clickable);
+			x += width + 10;
 		}
 		
 		// This is the Back button, which is grayed out in the main menu

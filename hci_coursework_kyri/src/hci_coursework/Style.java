@@ -12,6 +12,7 @@ public class Style {
 	public static final Color INACTIVE = new Color (148, 148, 148);
 	
 	public static final Border BORDER_LIGHT = new LineBorder(Color.BLACK, 1);
+	public static final Border BORDER_THICK = new LineBorder(Color.BLACK, 3);
 	
 	public static final Font BOLD_ITALIC = new Font("Tahoma", Font.BOLD | Font.ITALIC, 14);
 	public static final Font BOLD = new Font("Tahoma", Font.BOLD, 14);
