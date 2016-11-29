@@ -19,6 +19,7 @@ public class CategoryMenu {
 	private int max_x;
 	private int max_y;
 	private String category;
+	private Location[] locations;
     private int start;
     private int max_show = 16;
     private int max_show_row = 4;
@@ -33,10 +34,14 @@ public class CategoryMenu {
 	}
 	
 	public CategoryMenu(JFrame frame, String category, int start) {
+		this(frame, category, LocationDatabase.DATABASE.getLocations(category), 0);
+	}
+	public CategoryMenu(JFrame frame, String category, Location[] locations, int start) {
 		this.frame = frame;
 		this.max_x = frame.getWidth();
 		this.max_y = frame.getHeight();
 		this.category = category;
+		this.locations = locations;
 		this.start = start;
 		initialize();
 	}
@@ -65,7 +70,6 @@ public class CategoryMenu {
 		frame.getContentPane().add(btnHelp);
 		
 		// Button for each location
-		Location[] locations = LocationDatabase.DATABASE.getLocations(category);
 		int x = 20;
 		int y = 50;
 		int width = 200;
@@ -156,7 +160,7 @@ public class CategoryMenu {
 		} else {
 			up.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) { //If the arrow is pressed.
-					new CategoryMenu(frame, category, start - max_show_row);
+					new CategoryMenu(frame, category, locations, start - max_show_row);
 				}
 			});
 		}
@@ -177,7 +181,7 @@ public class CategoryMenu {
 		} else {
 			down.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) { //If the arrow is pressed.
-					new CategoryMenu(frame, category, start + max_show_row);
+					new CategoryMenu(frame, category, locations, start + max_show_row);
 				}
 			});
 		}
