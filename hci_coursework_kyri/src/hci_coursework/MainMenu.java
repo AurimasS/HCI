@@ -12,11 +12,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 public class MainMenu {
-
 	private JFrame frame;
 	private int max_x = 1024;
 	private int max_y = 768;
@@ -69,7 +67,7 @@ public class MainMenu {
 		frame.getContentPane().repaint();
 		
 		// Top Navigation pills
-		new NavPills(frame, null, null);
+		new NavPills(frame);
 		
 		// Help button
 		JButton btnHelp = new JButton("Help");
@@ -86,10 +84,13 @@ public class MainMenu {
 		// Panel for each category
 		int x = 20;
 		int y = 50;
-		int panel_height = 140;
+		int height = 140;
 		int width = 150;
-		int height = 40;
+		int text_height = 40;
 		int margin = 5;
+		
+		Image shadow_image = new ImageIcon(this.getClass().getResource("/images/other/Shadow.png")).getImage();
+		shadow_image = shadow_image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
 		
 		for (String cat: categories) {
 			if (x > 3 * width) {
@@ -99,8 +100,10 @@ public class MainMenu {
 			
 			// Clickable part of the panel
 			JButton clickable = new JButton();
-			clickable.setBounds(x, y, width, panel_height);
+			clickable.setBounds(x, y, width, height);
 			clickable.setOpaque(false);
+			clickable.setContentAreaFilled(false);
+			clickable.setBorderPainted(false);
 			clickable.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) { //If the panel is pressed.
 					new CategoryMenu(frame, cat);
@@ -109,34 +112,30 @@ public class MainMenu {
 			
 			// Background image of the panel
 			JLabel img = new JLabel();
-			img.setBounds(x, y, width, panel_height);
+			img.setBounds(x, y, width, height);
 			img.setBackground(Style.PRIMARY);
 			img.setOpaque(true);
             try {
-            	Image i = new ImageIcon(this.getClass().getResource("/categories/" + cat + ".jpg")).getImage();
-            	i = i.getScaledInstance(width, panel_height, Image.SCALE_SMOOTH);
+            	Image i = new ImageIcon(this.getClass().getResource("/images/categories/" + cat + ".jpg")).getImage();
+            	i = i.getScaledInstance(width, height, Image.SCALE_SMOOTH);
             	img.setIcon(new ImageIcon(i));
             } catch (Exception e) {
-            	Image i = new ImageIcon(this.getClass().getResource("/categories/Unknown.jpg")).getImage();
-            	i = i.getScaledInstance(width, panel_height, Image.SCALE_SMOOTH);
+            	Image i = new ImageIcon(this.getClass().getResource("/images/other/Unknown.jpg")).getImage();
+            	i = i.getScaledInstance(width, height, Image.SCALE_SMOOTH);
             	img.setIcon(new ImageIcon(i));
             }
             
             // Border shadow of the panel
 			JLabel shadow = new JLabel();
-			shadow.setBounds(x, y, width, panel_height);
+			shadow.setBounds(x, y, width, height);
 			shadow.setBorder(Style.BORDER_THICK);
-            try {
-            	Image i = new ImageIcon(this.getClass().getResource("/Shadow.png")).getImage();
-            	i = i.getScaledInstance(width, panel_height, Image.SCALE_SMOOTH);
-            	shadow.setIcon(new ImageIcon(i));
-            } catch (Exception e) {}
+            shadow.setIcon(new ImageIcon(shadow_image));
           
             // Label for the panel
 			JLabel label = new JLabel(cat);
 			label.setForeground(Color.WHITE);
 			label.setFont(Style.BOLD);
-			label.setBounds(x + margin, y + margin, width - margin, height - margin);
+			label.setBounds(x + margin, y + margin, width - margin, text_height - margin);
 			label.setVerticalAlignment(SwingConstants.NORTH);
 			label.setHorizontalAlignment(SwingConstants.LEFT);
 			
@@ -148,7 +147,7 @@ public class MainMenu {
 		}
 		
 		// This is the Back button, which is grayed out in the main menu
-		new NavBack(frame, null);
+		new NavBack(frame);
         
         // Weekly Recommendations label
 		JLabel lblTopThingsTo = new JLabel("Weekly Recommendations:");
@@ -165,9 +164,5 @@ public class MainMenu {
 		});
 		btnNewButton.setBounds(max_x - 120, max_y - 55, 100, 35);
 		frame.getContentPane().add(btnNewButton);
-	}
-
-	public JFrame getFrame() {
-		return this.frame;
 	}
 }

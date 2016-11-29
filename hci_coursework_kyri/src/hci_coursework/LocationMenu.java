@@ -2,9 +2,6 @@ package hci_coursework;
 
 import java.awt.Color;
 import java.awt.Image;
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.net.URL;
 import java.util.Random;
 
@@ -13,19 +10,16 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextPane;
-import javax.swing.Timer;
 
 public class LocationMenu {
-    JLabel pic;
-    Timer tm;
-    int x = 0;
-    
 	private JFrame frame;
 	private int max_x;
-	private int max_y;
 	
 	private String category;
 	private String name;
+	private String path;
+	private int start;
+	
 	private String[] description = {" Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
 			" Curabitur in nunc bibendum, aliquam metus sit amet, aliquam arcu.",
 			" Phasellus faucibus orci eget tellus commodo dapibus.",
@@ -35,31 +29,26 @@ public class LocationMenu {
 			" Corsus convallis nisi felis non felis - proin bibendum lorem a neque.",
 			" Sodales sagittis  maecenas enim purus, vulputate vel maximus.",
 			" Fusce luctus lacus et malesuada commodo maecenas dui lacus.",
-			" Fringilla sed metus ut, luctus posuere tortor nullam tincidunt.",
-			"\r\n Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-			"\r\n Nam cursus dui ac velit dictum, vitae blandit ligula venenatis.",
-			"\r\n Maecenas vel sapien non nibh mollis aliquam maximus id dolor."};
+			" Fringilla sed metus ut, luctus posuere tortor nullam tincidunt.\r\n",
+			" Lorem ipsum dolor sit amet, consectetur adipiscing elit.\r\n",
+			" Nam cursus dui ac velit dictum, vitae blandit ligula venenatis.\r\n",
+			" Maecenas vel sapien non nibh mollis aliquam maximus id dolor.\r\n"};
 
 	/**
 	 * Create the application.
 	 */
-	public LocationMenu(JFrame frame, String category, String name) {
+	public LocationMenu(JFrame frame, String category, String name, String path) {
+		this(frame, category, name, path, 0);
+	}
+	public LocationMenu(JFrame frame, String category, String name, String path, int start) {
 		this.frame = frame;
 		this.max_x = frame.getWidth();
-		this.max_y = frame.getHeight();
 		this.category = category;
 		this.name = name;
+		this.path = path;
+		this.start = start;
 		initialize();
 	}
-
-	String[] list = {
-            "img/a.jpg",//0
-            "img/b.jpg",//1
-            "img/c.jpg",//2
-            "img/d.jpg",//3
-            "img/e.jpg",//4
-
-          };
 	
 	/**
 	 * Initialize the contents of the frame.
@@ -68,33 +57,29 @@ public class LocationMenu {
 		frame.getContentPane().removeAll();
 		frame.getContentPane().repaint();
 		
-	    pic = new JLabel();
-		pic.setBounds(20, 50, 500, 300);
-		pic.setBorder(Style.BORDER_THICK);
-		frame.getContentPane().add(pic);
-        //Call The Function SetImageSize
-        SetImageSize(4);
-        
-       //set a timer
-        tm = new Timer(1000,new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                SetImageSize(x);
-                x += 1;
-                if (x >= list.length) {
-                    x = 0; 
-                }
-            }
-        });
-        
-        // Starts the timer 
-        tm.start();
+		// Location picture
+		int width = 500;
+		int height = 300;
+	    JLabel picture = new JLabel();
+		picture.setBounds(20, 50, width, height);
+		picture.setBorder(Style.BORDER_THICK);
+		try {
+			Image i = new ImageIcon(this.getClass().getResource(path)).getImage();
+			i = i.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+			picture.setIcon(new ImageIcon(i));
+		} catch (Exception e) {
+			path = "/images/other/Unknown.jpg";
+			Image i = new ImageIcon(this.getClass().getResource(path)).getImage();
+			i = i.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+			picture.setIcon(new ImageIcon(i));
+		} 
+		frame.getContentPane().add(picture);
         
 		// Top Navigation pills
-		new NavPills(frame, category, name);
+		new NavPills(frame, category, name, start);
         
         // Back button
-		new NavBack(frame, category);
+		new NavBack(frame, category, start);
 		
 		// Generate random description
 		String descr = "";
@@ -107,7 +92,6 @@ public class LocationMenu {
 		JTextPane txtDescription = new JTextPane();
 		txtDescription.setBounds(20, 350, 500, 310);
 		txtDescription.setBorder(Style.BORDER_THIN_EMPTY);
-
 		txtDescription.setEditable(false);
 		txtDescription.setText(descr);
 		frame.getContentPane().add(txtDescription);
@@ -127,8 +111,8 @@ public class LocationMenu {
 		address += alphabet.charAt(rnd);
 		
 		// Directions map
-		int width = 420;
-		int height = 330;
+		width = 420;
+		height = 330;
 		JLabel map = new JLabel("");
 		map.setBounds(max_x - 440, 50, width, height);
 		map.setBorder(Style.BORDER_THICK);
@@ -140,7 +124,7 @@ public class LocationMenu {
 			Image image = ImageIO.read(url);
 			map.setIcon(new ImageIcon(image));
 		} catch (Exception e) {
-			Image image = new ImageIcon(this.getClass().getResource("/loc.gif")).getImage();
+			Image image = new ImageIcon(this.getClass().getResource("/images/other/loc.gif")).getImage();
 			map.setIcon(new ImageIcon(image));
 		} 
 		frame.getContentPane().add(map);
@@ -153,19 +137,7 @@ public class LocationMenu {
 		txtAddress.setForeground(Color.WHITE);
 		txtAddress.setBorder(Style.BORDER_THICK_EMPTY);
 		txtAddress.setFont(Style.BOLD);
-		txtAddress.setBounds(max_x - 320, 400, 170, 80);
+		txtAddress.setBounds(max_x - 330, 400, 180, 80);
 		frame.getContentPane().add(txtAddress);
-		
-		
-	}
-	public void SetImageSize(int i){
-        ImageIcon icon = new ImageIcon(list[i]);
-        Image img = icon.getImage();
-        Image newImg = img.getScaledInstance(pic.getWidth(), pic.getHeight(), Image.SCALE_SMOOTH);
-        ImageIcon newImc = new ImageIcon(newImg);
-        pic.setIcon(newImc);
-    }
-	public JFrame getFrame() {
-		return this.frame;
 	}
 }

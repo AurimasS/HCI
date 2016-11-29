@@ -13,8 +13,21 @@ public class NavPills {
 	private JFrame frame;
 	private String category;
 	private String name;
+	private int start;
+	
+	public NavPills(JFrame frame) {
+		this(frame, null, null, 0);
+	}
+	
+	public NavPills(JFrame frame, String category) {
+		this(frame, category, null, 0);
+	}
 	
 	public NavPills(JFrame frame, String category, String name) {
+		this(frame, category, name, 0);
+	}
+	
+	public NavPills(JFrame frame, String category, String name, int start) {
 		this.frame = frame;
 		// Make sure null category and not null name aren't possible
 		if (category == null && name != null) {
@@ -24,6 +37,7 @@ public class NavPills {
 			this.category = category;
 			this.name = name;
 		}
+		this.start = start;
 		buildNavPills();
 	}
 	
@@ -37,11 +51,11 @@ public class NavPills {
 		// Home button, highlighted
         JButton btnHome = new JButton("Home");
         try {
-        	Image icon = new ImageIcon(this.getClass().getResource("/icons/Home.png")).getImage();
+        	Image icon = new ImageIcon(this.getClass().getResource("/images/icons/Home.png")).getImage();
         	icon = icon.getScaledInstance(icon_size, icon_size, Image.SCALE_SMOOTH);
         	btnHome.setIcon(new ImageIcon(icon));
         } catch (Exception e) {
-        	Image icon = new ImageIcon(this.getClass().getResource("/icons/Unknown.png")).getImage();
+        	Image icon = new ImageIcon(this.getClass().getResource("/images/icons/Unknown.png")).getImage();
         	icon = icon.getScaledInstance(icon_size, icon_size, Image.SCALE_SMOOTH);
         	btnHome.setIcon(new ImageIcon(icon));
         }
@@ -67,11 +81,11 @@ public class NavPills {
     		// Category button
             JButton btnCat = new JButton(this.category);
             try {
-            	Image icon = new ImageIcon(this.getClass().getResource("/icons/" + this.category + ".png")).getImage();
+            	Image icon = new ImageIcon(this.getClass().getResource("/images/icons/" + this.category + ".png")).getImage();
             	icon = icon.getScaledInstance(icon_size, icon_size, Image.SCALE_SMOOTH);
             	btnCat.setIcon(new ImageIcon(icon));
             } catch (Exception e) {
-            	Image icon = new ImageIcon(this.getClass().getResource("/icons/Unknown.png")).getImage();
+            	Image icon = new ImageIcon(this.getClass().getResource("/images/icons/Unknown.png")).getImage();
             	icon = icon.getScaledInstance(icon_size, icon_size, Image.SCALE_SMOOTH);
             	btnCat.setIcon(new ImageIcon(icon));
             }
@@ -88,13 +102,11 @@ public class NavPills {
             	btnCat.addActionListener(new ActionListener() {			
         			public void actionPerformed(ActionEvent e) {
         				@SuppressWarnings("unused")
-						CategoryMenu menu = new CategoryMenu(frame, category);
+						CategoryMenu menu = new CategoryMenu(frame, category, start);
         			}
                 });
             	
                 JButton btnName = new JButton(this.name);
-        		//Image icon = new ImageIcon(this.getClass().getResource("/Back.png")).getImage();
-                //btnName.setIcon(new ImageIcon(icon));
                 btnName.setBounds(home_width + cat_width, 0, name_width, height);
                 btnName.setBackground(Style.HIGHLIGHT);
                 btnName.setForeground(Color.WHITE);
