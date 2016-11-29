@@ -48,7 +48,7 @@ public class NavPills {
         btnHome.setBounds(0, 0, home_width, height);
         btnHome.setBackground(Style.HIGHLIGHT);
         btnHome.setForeground(Color.WHITE);
-        btnHome.setBorder(Style.BORDER_LIGHT);
+        btnHome.setBorder(Style.BORDER_THIN);
         btnHome.setFont(Style.BOLD_ITALIC);
 
         
@@ -78,7 +78,7 @@ public class NavPills {
             btnCat.setBounds(home_width, 0, cat_width, height);
             btnCat.setBackground(Style.HIGHLIGHT);
             btnCat.setForeground(Color.WHITE);
-            btnCat.setBorder(Style.BORDER_LIGHT);
+            btnCat.setBorder(Style.BORDER_THIN);
             btnCat.setFont(Style.ITALIC);
             
             // If name exists, add it and highlight it instead of category button
@@ -98,7 +98,7 @@ public class NavPills {
                 btnName.setBounds(home_width + cat_width, 0, name_width, height);
                 btnName.setBackground(Style.HIGHLIGHT);
                 btnName.setForeground(Color.WHITE);
-                btnName.setBorder(Style.BORDER_LIGHT);
+                btnName.setBorder(Style.BORDER_THIN);
                 btnName.setFont(Style.ITALIC);
                 
                 this.frame.getContentPane().add(btnHome);

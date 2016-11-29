@@ -40,7 +40,7 @@ public class NavBack {
         	btnBack.setIcon(new ImageIcon(icon));
         }
 		btnBack.setForeground(Color.WHITE);
-		btnBack.setBorder(Style.BORDER_LIGHT);
+		btnBack.setBorder(Style.BORDER_THIN);
 		btnBack.setFont(Style.BOLD);
 		
 		if (category == null) {

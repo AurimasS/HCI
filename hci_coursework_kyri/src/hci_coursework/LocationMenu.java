@@ -1,13 +1,15 @@
 package hci_coursework;
 
-import java.awt.Font;
+import java.awt.Color;
 import java.awt.Image;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 import java.util.Random;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextPane;
@@ -67,7 +69,8 @@ public class LocationMenu {
 		frame.getContentPane().repaint();
 		
 	    pic = new JLabel();
-		pic.setBounds(20, 50, 500, 275);
+		pic.setBounds(20, 50, 500, 300);
+		pic.setBorder(Style.BORDER_THICK);
 		frame.getContentPane().add(pic);
         //Call The Function SetImageSize
         SetImageSize(4);
@@ -93,12 +96,6 @@ public class LocationMenu {
         // Back button
 		new NavBack(frame, category);
 		
-		// Description label
-		JLabel lblHistoryOfThe = new JLabel("Description");
-		lblHistoryOfThe.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblHistoryOfThe.setBounds(225, 335, 165, 15);
-		frame.getContentPane().add(lblHistoryOfThe);
-		
 		// Generate random description
 		String descr = "";
 		for (int i = 1; i <= 20; i++){
@@ -107,37 +104,20 @@ public class LocationMenu {
 		}
 		
 		// Description text
-		JTextPane txtpnTheKelvingroveArt = new JTextPane();
-		txtpnTheKelvingroveArt.setEditable(false);
-		txtpnTheKelvingroveArt.setText(descr);
-		txtpnTheKelvingroveArt.setBounds(20, 355, 500, 300);
-		frame.getContentPane().add(txtpnTheKelvingroveArt);
-		
-		// Directions label
-		JLabel lblDirections = new JLabel("Directions");
-		lblDirections.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblDirections.setBounds(max_x - 275, 50, 85, 15);
-		frame.getContentPane().add(lblDirections);
-		
-		// Directions map
-		JLabel lblNewLabel_1 = new JLabel("");
-		Image eleph = new ImageIcon(this.getClass().getResource("/loc.gif")).getImage();
-		lblNewLabel_1.setIcon(new ImageIcon(eleph));
-		lblNewLabel_1.setBounds(max_x - 440, 80, 420, 300);
-		frame.getContentPane().add(lblNewLabel_1);
-		
-		// Address label
-		JLabel lblAddress = new JLabel("Address");
-		lblAddress.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblAddress.setBounds(max_x - 275, 400, 85, 15);
-		frame.getContentPane().add(lblAddress);
+		JTextPane txtDescription = new JTextPane();
+		txtDescription.setBounds(20, 350, 500, 310);
+		txtDescription.setBorder(Style.BORDER_THIN_EMPTY);
+
+		txtDescription.setEditable(false);
+		txtDescription.setText(descr);
+		frame.getContentPane().add(txtDescription);
 		
 		// Generate random address
 		String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-		String address = "";
-		int rnd = new Random().nextInt(256) + 1;
-		address += rnd + " Argyle Street,\r\nGlasgow,\r\nG";
-		rnd = new Random().nextInt(98) + 1;
+		String address = "Address:\r\n";
+		int street = new Random().nextInt(1445) + 1;
+		address += street + " Argyle Street,\r\nGlasgow,\r\nG";
+		int rnd = new Random().nextInt(98) + 1;
 		address += rnd + " ";
 		rnd = new Random().nextInt(8) + 1;
 		address += rnd;
@@ -146,12 +126,35 @@ public class LocationMenu {
 		rnd = new Random().nextInt(alphabet.length());
 		address += alphabet.charAt(rnd);
 		
+		// Directions map
+		int width = 420;
+		int height = 330;
+		JLabel map = new JLabel("");
+		map.setBounds(max_x - 440, 50, width, height);
+		map.setBorder(Style.BORDER_THICK);
+		try {
+			String path = "https://maps.googleapis.com/maps/api/staticmap?center="
+					+ street + "+Argyle+St,+Glasgow&zoom=17&size=" + width + "x" + height + "&maptype=roadmap&"
+					+ "markers=color:red|" + street + "+Argyle+St,+Glasgow";
+			URL url = new URL(path);
+			Image image = ImageIO.read(url);
+			map.setIcon(new ImageIcon(image));
+		} catch (Exception e) {
+			Image image = new ImageIcon(this.getClass().getResource("/loc.gif")).getImage();
+			map.setIcon(new ImageIcon(image));
+		} 
+		frame.getContentPane().add(map);
+		
 		// Address text
-		JTextPane txtpnAddress = new JTextPane();
-		txtpnAddress.setEditable(false);
-		txtpnAddress.setText(address);
-		txtpnAddress.setBounds(max_x - 280, 420, 120, 50);
-		frame.getContentPane().add(txtpnAddress);
+		JTextPane txtAddress = new JTextPane();
+		txtAddress.setEditable(false);
+		txtAddress.setText(address);
+		txtAddress.setBackground(Style.PRIMARY);
+		txtAddress.setForeground(Color.WHITE);
+		txtAddress.setBorder(Style.BORDER_THICK_EMPTY);
+		txtAddress.setFont(Style.BOLD);
+		txtAddress.setBounds(max_x - 320, 400, 170, 80);
+		frame.getContentPane().add(txtAddress);
 		
 		
 	}
