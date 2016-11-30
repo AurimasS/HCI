@@ -60,13 +60,17 @@ public class CategoryMenu {
 		JButton btnHelp = new JButton("Help");
 		Image help = new ImageIcon(this.getClass().getResource("/images/icons/Unknown.png")).getImage();
 		help = help.getScaledInstance(25, 25, Image.SCALE_SMOOTH);
-		btnHelp.setBounds(max_x - 100, 0, 100, 35);
 		btnHelp.setIcon(new ImageIcon(help));
+		btnHelp.setBackground(Style.PRIMARY);
+		btnHelp.setBorder(Style.BORDER_THIN);
+		btnHelp.setForeground(Color.WHITE);
+		btnHelp.setFont(Style.BOLD);
 		btnHelp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				 JOptionPane.showMessageDialog(null, "this is a pop up message");
+				 JOptionPane.showMessageDialog(null, "Welcome to Glasgow, Please choose one of the options below");
 			}
 		});
+		btnHelp.setBounds(max_x - 80, 0, 80, 35);
 		frame.getContentPane().add(btnHelp);
 		
 		// Button for each location

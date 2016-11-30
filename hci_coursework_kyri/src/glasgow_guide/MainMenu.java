@@ -7,6 +7,7 @@ import java.awt.EventQueue;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -16,6 +17,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextPane;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 class ChangeRec extends TimerTask {
@@ -65,7 +67,7 @@ class ChangeRec extends TimerTask {
     			rec_img.setIcon(new ImageIcon(i));
     		} catch (Exception e) {
     			Image i =  new ImageIcon(this.getClass().getResource("/images/other/Unknown.jpg")).getImage();
-    			i = i.getScaledInstance(width, height, Image.SCALE_FAST);
+    			i = i.getScaledInstance(width, height, Image.SCALE_SMOOTH);
     			rec_img.setIcon(new ImageIcon(i));
     		}
     		
@@ -138,12 +140,16 @@ public class MainMenu {
 		Image help = new ImageIcon(this.getClass().getResource("/images/icons/Unknown.png")).getImage();
 		help = help.getScaledInstance(25, 25, Image.SCALE_SMOOTH);
 		btnHelp.setIcon(new ImageIcon(help));
+		btnHelp.setBackground(Style.PRIMARY);
+		btnHelp.setBorder(Style.BORDER_THIN);
+		btnHelp.setForeground(Color.WHITE);
+		btnHelp.setFont(Style.BOLD);
 		btnHelp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				 JOptionPane.showMessageDialog(null, "Welcome to Glasgow, Please choose one of the options below");
 			}
 		});
-		btnHelp.setBounds(max_x - 100, 0, 100, 35);
+		btnHelp.setBounds(max_x - 80, 0, 80, 35);
 		frame.getContentPane().add(btnHelp);
 		
 		// Panel for each category
@@ -302,6 +308,59 @@ public class MainMenu {
 				"  06/12 — Heated Monkeys \r\n" +
 				"  07/12 — Screaming Monkeys \r\n");
 		frame.getContentPane().add(txtEvents);
+		
+		// Search bar
+		width = 200;
+		height = 35;
+		JTextField txtsearch = new JTextField("Search...");
+		txtsearch.setBounds(max_x - 150 - width, 5, width, height);
+		txtsearch.setFont(Style.ITALIC);
+		txtsearch.setBackground(Color.WHITE);
+		txtsearch.setBorder(Style.BORDER_THIN_EMPTY);
+		txtsearch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String query = txtsearch.getText();
+				ArrayList<Location> locs = new ArrayList<Location>();
+				for (String cat : LocationDatabase.CATEGORIES) {
+					for (Location loc : LocationDatabase.DATABASE.getLocations(cat)){
+						if (loc.getName().toLowerCase().contains(query.toLowerCase())) {
+							locs.add(loc);
+						}
+					}
+				}
+				Location[] locss = locs.toArray(new Location[locs.size()]);
+				new CategoryMenu(frame, query, locss, 0);
+			}
+		});
+		frame.getContentPane().add(txtsearch);
+		
+		// search icon button
+		JButton searchIcon = new JButton();
+		i = new ImageIcon(this.getClass().getResource("/images/icons/Search.png")).getImage();
+		i = i.getScaledInstance(25, 25, Image.SCALE_SMOOTH);
+		searchIcon.setIcon(new ImageIcon(i));
+		searchIcon.setBackground(Style.PRIMARY);
+		searchIcon.setBorder(Style.BORDER_THIN);
+		searchIcon.setForeground(Color.WHITE);
+		searchIcon.setFont(Style.BOLD);
+		searchIcon.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String query = txtsearch.getText();
+				ArrayList<Location> locs = new ArrayList<Location>();
+				for (String cat : LocationDatabase.CATEGORIES) {
+					for (Location loc : LocationDatabase.DATABASE.getLocations(cat)){
+						if (loc.getName().toLowerCase().contains(query.toLowerCase())) {
+							locs.add(loc);
+						}
+					}
+				}
+				Location[] locss = locs.toArray(new Location[locs.size()]);
+				new CategoryMenu(frame, query, locss, 0);
+			}
+		});
+		searchIcon.setBounds(txtsearch.getBounds().x - 40, 5, 40, 35);
+		frame.getContentPane().add(searchIcon);
+		
 		
 		// History button
 		width = 125;
