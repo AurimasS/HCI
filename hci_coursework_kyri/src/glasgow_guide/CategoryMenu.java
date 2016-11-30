@@ -24,7 +24,7 @@ public class CategoryMenu {
     private int max_show = 16;
     private int max_show_row = 4;
 	
-    private Image unknown = new ImageIcon(this.getClass().getResource("/images/icons/Unknown.png")).getImage();
+    private Image unknown = new ImageIcon(this.getClass().getResource("/images/other/Unknown.jpg")).getImage();
 	
     /**
 	 *  Create the menu
@@ -103,7 +103,12 @@ public class CategoryMenu {
 			clickable.setOpaque(false);
 			clickable.setContentAreaFilled(false);
 			clickable.setBorderPainted(false);
-
+			clickable.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) { //If the panel is pressed.
+					new LocationMenu(frame, loc, start);
+				}
+			});
+			
 			// Background image of the panel
 			JLabel img = new JLabel();
 			img.setBounds(x, y, width, height);
@@ -115,12 +120,7 @@ public class CategoryMenu {
 			} catch (Exception e) {
 				img.setIcon(new ImageIcon(unknown));
 			}
-			
-			clickable.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) { //If the panel is pressed.
-					new LocationMenu(frame, loc, start);
-				}
-			});
+
 			
 			// Border shadow of the panel
 			JLabel shadow = new JLabel();

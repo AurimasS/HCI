@@ -17,8 +17,8 @@ public class LocationMenu {
 	private Location location;
 	private int start;
 
-    private Image unknown = new ImageIcon(this.getClass().getResource("/images/icons/Unknown.png")).getImage();
-	
+	private Image unknown = new ImageIcon(this.getClass().getResource("/images/other/Unknown.jpg")).getImage();
+		
 	/**
 	 * Create the menu
 	 */
@@ -39,6 +39,9 @@ public class LocationMenu {
 	private void initialize() {
 		frame.getContentPane().removeAll();
 		frame.getContentPane().repaint();
+        
+		// Top Navigation pills
+		new NavPills(frame, location.getCategory(), location.getName(), start);
 		
 		// Location picture
 		int width = 500;
@@ -54,12 +57,6 @@ public class LocationMenu {
 			picture.setIcon(new ImageIcon(i));
 		} 
 		frame.getContentPane().add(picture);
-        
-		// Top Navigation pills
-		new NavPills(frame, location.getCategory(), location.getName(), start);
-        
-        // Back button
-		new NavBack(frame, location.getCategory(), start);
 		
 		// Description text
 		JTextPane txtDescription = new JTextPane();
@@ -108,5 +105,8 @@ public class LocationMenu {
 		txtAddress.setFont(Style.BOLD);
 		txtAddress.setBounds(max_x - 330, 400, 180, 80);
 		frame.getContentPane().add(txtAddress);
+		
+        // Back button
+		new NavBack(frame, location.getCategory(), start);
 	}
 }

@@ -21,8 +21,8 @@ public class MainMenu {
 	private int max_x = 1024;
 	private int max_y = 768;
     
-	private Image unknown = new ImageIcon(this.getClass().getResource("/images/icons/Unknown.png")).getImage();
-	
+	private Image unknown = new ImageIcon(this.getClass().getResource("/images/other/Unknown.jpg")).getImage();
+		
     /**
 	 * Launch the application.
 	 */
@@ -156,13 +156,29 @@ public class MainMenu {
 		frame.getContentPane().add(lblTopThingsTo);
 		
 		// History button
-		JButton btnNewButton = new JButton("History");
-		btnNewButton.setFont(new Font("Calibri", Font.BOLD, 14));
-		btnNewButton.addActionListener(new ActionListener() {
+		width = 125;
+		height = 35;
+		int icon_size = 25;
+		JButton btnHistory = new JButton("History");
+		btnHistory.setBounds(max_x - width - 20, max_y - 55, width, height);
+		btnHistory.setFont(Style.BOLD);
+		btnHistory.setBackground(Style.PRIMARY);
+		btnHistory.setForeground(Color.WHITE);
+		btnHistory.setBorder(Style.BORDER_THIN);
+        try {
+        	Image icon = new ImageIcon(this.getClass().getResource("/images/icons/History.png")).getImage();
+        	icon = icon.getScaledInstance(icon_size, icon_size, Image.SCALE_SMOOTH);
+        	btnHistory.setIcon(new ImageIcon(icon));
+        } catch (Exception e) {
+        	Image icon = new ImageIcon(this.getClass().getResource("/images/icons/Unknown.png")).getImage();
+        	icon = icon.getScaledInstance(icon_size, icon_size, Image.SCALE_SMOOTH);
+        	btnHistory.setIcon(new ImageIcon(icon));
+        }
+		btnHistory.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				new HistoryMenu(frame);
 			}
 		});
-		btnNewButton.setBounds(max_x - 120, max_y - 55, 100, 35);
-		frame.getContentPane().add(btnNewButton);
+		frame.getContentPane().add(btnHistory);
 	}
 }

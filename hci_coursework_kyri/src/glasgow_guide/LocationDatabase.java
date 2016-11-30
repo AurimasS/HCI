@@ -121,7 +121,7 @@ public class LocationDatabase {
 	}
 
 	// Utility methods
-	private String generateRandomDescription(int sentence_count) {
+	public static String generateRandomDescription(int sentence_count) {
 		String[] lorem_ipsum = {" Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
 				" Curabitur in nunc bibendum, aliquam metus sit amet, aliquam arcu.",
 				" Phasellus faucibus orci eget tellus commodo dapibus.",
