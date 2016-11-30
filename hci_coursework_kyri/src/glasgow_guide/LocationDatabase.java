@@ -4,10 +4,11 @@ package glasgow_guide;
  * Generates random data to be used by the rest of the application
  */
 import java.awt.Image;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
-
 import javax.swing.ImageIcon;
 
 public class LocationDatabase {
@@ -53,7 +54,7 @@ public class LocationDatabase {
 			"Q & A Room", "Havana Shrine Coffee Bar", "Hava Pearl Barista", "Melting Boulder Diner",
 			"Havana Fest Espresso Bar", "Hidden Heaven Diner", "Hot Shots Cafe", "This & That Coffee Bar",
 			"Thinking Cup Cafe", "Ground Up Coffee Bar", "Trembling Cup Cafeteria", "Gentle Teapot Room",
-			"PLACEHOLDER", "PLACEHOLDER", "Broad Drum"};
+			"Thinking Room", "Cream & Sugar", "Broad Drum"};
 	private String[] restaurant_names = {"The Vintage Duke", "The Village Door", "Bambino", "Beehive",
 			"The Northern After Dark", "The Cool Cat Shrimp", "The Malt Lily", "Retro",
 			"The Goat", "The Lion", "The Coriander Lion", "The Streetwise Crown",
@@ -118,6 +119,8 @@ public class LocationDatabase {
 			
 			this.locations.put(category, loc_list);
 		}
+		
+		generateRandomRecommendations(5);
 	}
 
 	// Utility methods
@@ -152,15 +155,31 @@ public class LocationDatabase {
 		String postcode = "G";
 		
 		String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-		int rnd = new Random().nextInt(98) + 1;
+		Random random = new Random();
+		int rnd = random.nextInt(98) + 1;
 		postcode += rnd + " ";
-		rnd = new Random().nextInt(8) + 1;
+		rnd = random.nextInt(8) + 1;
 		postcode += rnd;
-		rnd = new Random().nextInt(alphabet.length());
+		rnd = random.nextInt(alphabet.length());
 		postcode += alphabet.charAt(rnd);
-		rnd = new Random().nextInt(alphabet.length());
+		rnd = random.nextInt(alphabet.length());
 		postcode += alphabet.charAt(rnd);
 		
 		return postcode;
+	}
+	
+	private void generateRandomRecommendations(int count) {
+		Location[] rec_loc_list = new Location[count];
+		Random random = new Random();
+		List<String> categories = new ArrayList<String>(locations.keySet());
+		
+		for (int i = 0; i < count; i++) {
+			int rnd = random.nextInt(categories.size());
+			Location[] loc_list = getLocations(categories.get(rnd));
+			rnd = random.nextInt(loc_list.length);
+			rec_loc_list[i] = loc_list[rnd];
+		}
+		
+		locations.put("Recommendations", rec_loc_list);
 	}
 }

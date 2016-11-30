@@ -80,7 +80,7 @@ public class CategoryMenu {
 		
 		// Reused each loop iteration
 		unknown = unknown.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-		Image shadow_image = new ImageIcon(this.getClass().getResource("/images/other/Shadow.png")).getImage();
+		Image shadow_image = new ImageIcon(this.getClass().getResource("/images/other/shadow.png")).getImage();
 		shadow_image = shadow_image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
 		
 		for (int n = start; n < locations.length; n++) {
