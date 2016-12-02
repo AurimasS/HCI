@@ -11,12 +11,14 @@ import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class NavPills {
 	private JFrame frame;
 	private String category;
 	private String name;
 	private int start;
+	private int max_x;
 	
 	public NavPills(JFrame frame) {
 		this(frame, null, null, 0);
@@ -32,6 +34,7 @@ public class NavPills {
 	
 	public NavPills(JFrame frame, String category, String name, int start) {
 		this.frame = frame;
+		this.max_x = frame.getWidth();
 		// Make sure null category and not null name aren't possible
 		if (category == null && name != null) {
 			this.category = name;
@@ -126,5 +129,22 @@ public class NavPills {
         } else {
         	this.frame.getContentPane().add(btnHome);
         }
+        
+		// Help button
+		JButton btnHelp = new JButton("Help");
+		Image help = new ImageIcon(this.getClass().getResource("/images/icons/Unknown.png")).getImage();
+		help = help.getScaledInstance(25, 25, Image.SCALE_SMOOTH);
+		btnHelp.setIcon(new ImageIcon(help));
+		btnHelp.setBackground(Style.PRIMARY);
+		btnHelp.setBorder(Style.BORDER_THIN);
+		btnHelp.setForeground(Color.WHITE);
+		btnHelp.setFont(Style.BOLD);
+		btnHelp.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				 JOptionPane.showMessageDialog(null, "Welcome to Glasgow, Please choose one of the options below");
+			}
+		});
+		btnHelp.setBounds(max_x - 80, 0, 80, 35);
+		frame.getContentPane().add(btnHelp);
 	}
 }

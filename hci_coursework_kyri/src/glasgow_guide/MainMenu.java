@@ -15,11 +15,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JTextPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+// A timer task that replaces the recommendations at a scheduled interval
 class ChangeRec extends TimerTask {
 	private Location[] loc_list;
 	private JFrame frame;
@@ -134,23 +134,6 @@ public class MainMenu {
 		
 		// Top Navigation pills
 		new NavPills(frame);
-		
-		// Help button
-		JButton btnHelp = new JButton("Help");
-		Image help = new ImageIcon(this.getClass().getResource("/images/icons/Unknown.png")).getImage();
-		help = help.getScaledInstance(25, 25, Image.SCALE_SMOOTH);
-		btnHelp.setIcon(new ImageIcon(help));
-		btnHelp.setBackground(Style.PRIMARY);
-		btnHelp.setBorder(Style.BORDER_THIN);
-		btnHelp.setForeground(Color.WHITE);
-		btnHelp.setFont(Style.BOLD);
-		btnHelp.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				 JOptionPane.showMessageDialog(null, "Welcome to Glasgow, Please choose one of the options below");
-			}
-		});
-		btnHelp.setBounds(max_x - 80, 0, 80, 35);
-		frame.getContentPane().add(btnHelp);
 		
 		// Panel for each category
 		int x = 20;
@@ -311,15 +294,15 @@ public class MainMenu {
 		
 		// Search bar
 		width = 200;
-		height = 35;
-		JTextField txtsearch = new JTextField("Search...");
-		txtsearch.setBounds(max_x - 150 - width, 5, width, height);
-		txtsearch.setFont(Style.ITALIC);
-		txtsearch.setBackground(Color.WHITE);
-		txtsearch.setBorder(Style.BORDER_THIN_EMPTY);
-		txtsearch.addActionListener(new ActionListener() {
+		height = 33;
+		JTextField txtSearch = new JTextField("Search...");
+		txtSearch.setBounds(max_x - 150 - width, 2, width, height);
+		txtSearch.setFont(Style.ITALIC);
+		txtSearch.setBackground(Color.WHITE);
+		txtSearch.setBorder(Style.BORDER_THIN_EMPTY);
+		txtSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String query = txtsearch.getText();
+				String query = txtSearch.getText();
 				ArrayList<Location> locs = new ArrayList<Location>();
 				for (String cat : LocationDatabase.CATEGORIES) {
 					for (Location loc : LocationDatabase.DATABASE.getLocations(cat)){
@@ -332,10 +315,11 @@ public class MainMenu {
 				new CategoryMenu(frame, query, locss, 0);
 			}
 		});
-		frame.getContentPane().add(txtsearch);
+		frame.getContentPane().add(txtSearch);
 		
-		// search icon button
+		// Search icon button
 		JButton searchIcon = new JButton();
+		searchIcon.setBounds(txtSearch.getBounds().x - 40, txtSearch.getBounds().y, 40, txtSearch.getHeight());
 		i = new ImageIcon(this.getClass().getResource("/images/icons/Search.png")).getImage();
 		i = i.getScaledInstance(25, 25, Image.SCALE_SMOOTH);
 		searchIcon.setIcon(new ImageIcon(i));
@@ -345,20 +329,9 @@ public class MainMenu {
 		searchIcon.setFont(Style.BOLD);
 		searchIcon.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String query = txtsearch.getText();
-				ArrayList<Location> locs = new ArrayList<Location>();
-				for (String cat : LocationDatabase.CATEGORIES) {
-					for (Location loc : LocationDatabase.DATABASE.getLocations(cat)){
-						if (loc.getName().toLowerCase().contains(query.toLowerCase())) {
-							locs.add(loc);
-						}
-					}
-				}
-				Location[] locss = locs.toArray(new Location[locs.size()]);
-				new CategoryMenu(frame, query, locss, 0);
+				txtSearch.postActionEvent();
 			}
 		});
-		searchIcon.setBounds(txtsearch.getBounds().x - 40, 5, 40, 35);
 		frame.getContentPane().add(searchIcon);
 		
 		
